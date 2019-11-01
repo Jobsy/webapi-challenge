@@ -103,6 +103,21 @@ router.put("/:id", (req, res) => {
         })
 })
 
+router.post("/", (req, res) => {
+    const project = req.body;
+    const { name, description } = req.body;
+    const { url } = req;
+    if (!name || !description) {
+        res.status(400).json({ errorMessage: "Please provide name and description for the project." })
+    }
+    dB.insert(project)
+        .then(() => {
+            res.status(201).json({ postedContent: project, url: url, operation: "POST" })
+        })
+        .catch(() => {
+            res.status(500).json({ error: "There was an error while saving the project to the database" })
+        })
+});
 
 
 module.exports = router;
