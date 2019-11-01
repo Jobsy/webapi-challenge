@@ -1,6 +1,7 @@
 const express = require("express");
 
 const dB = require("../data/helpers/projectModel");
+const actionDb = require("../data/helpers/actionModel");
 
 const router = express.Router();
 
@@ -46,6 +47,23 @@ router.get("/:id/projActions", (req, res) => {
         })
         .catch((err) => {
             res.status(500).json({ error: "The post information could not be retrieved." + err})
+        })
+})
+
+//get actions by action id using project url
+router.get("/:id/actions", (req, res) => {
+    const { id } = req.params;
+
+    actionDb.get(id)
+        .then((actions) => {
+
+            if (actions.length === 0) {
+                res.status(404).json({ message: "The action with the specified ID does not exist." })
+            }
+            res.status(200).json({ actions: actions })
+        })
+        .catch(() => {
+            res.status(500).json({ error: "The action information could not be retrieved." })
         })
 })
 
