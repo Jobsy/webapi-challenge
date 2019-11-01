@@ -5,10 +5,13 @@ const dB = require("../data/helpers/projectModel");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-    // dB.get()
-    // .then(() => {
-        res.status(200).json("it's workinggggg!!!")
-    // }).catch(() => { res.status(500).json("")})
+    dB.get()
+        .then((posts) => {
+            res.status(200).json(posts)
+        })
+        .catch(() => {
+            res.status(500).json({ error: "The posts information could not be retrieved." })
+        })
 })
 
 
