@@ -119,5 +119,33 @@ router.post("/", (req, res) => {
         })
 });
 
+router.post("/:id/actions", (req, res) => {
+    
+    const action = req.body;
+    const { description, notes, completed} = req.body;
+    const { url } = req;
+    const { id } = req.params;
+
+    if (!description || !notes) {
+        res.status(400).json({ errorMessage: "Please provide description, and notes for the action." })
+    }
+    actionDb.insert({ description, notes, project_id: id })
+        .then((usersID) => {
+            console.log("????: ", usersID)
+
+            if (usersID.id > 0) {
+                res.status(201).json({ postedContent: action, url: url, operation: "POST" })
+            }
+            else{
+                res.status(404).json({ message: "The action with the specified ID does not exist." })
+            }
+            
+        })
+        .catch((err) => {
+            res.status(500).json({ error: "There was an error while saving the comment to the database" + err })
+        })
+})
+
+
 
 module.exports = router;
