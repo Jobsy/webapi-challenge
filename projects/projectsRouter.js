@@ -135,7 +135,7 @@ router.post("/:id/actions", (req, res) => {
   if (!description || !notes) {
     res.status(400).json({ errorMessage: "Please provide description, and notes for the action." })
   }
-  actionDb.insert({ description, notes, project_id: id })
+  actionDb.insert({ description, notes, completed, project_id: id })
     .then((usersID) => {
       console.log("????: ", usersID)
 
