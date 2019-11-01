@@ -62,8 +62,8 @@ router.get("/:id/actions", (req, res) => {
             }
             res.status(200).json({ actions: actions })
         })
-        .catch(() => {
-            res.status(500).json({ error: "The action information could not be retrieved." })
+        .catch((err) => {
+            res.status(500).json({ error: "The action information could not be retrieved." + err})
         })
 })
 
@@ -77,8 +77,8 @@ router.delete("/:id", (req, res) => {
             }
             res.status(200).json({ removedPost: `project with id: ${id} deleted` })
         })
-        .catch(() => {
-            res.status(500).json({ error: "The project could not be removed" })
+        .catch((err) => {
+            res.status(500).json({ error: "The project could not be removed" + err})
         })
 })
 
@@ -98,8 +98,8 @@ router.put("/:id", (req, res) => {
             }
             res.status(404).json({ message: "The project with the specified ID does not exist." })
         })
-        .catch(() => {
-            res.status(500).json({ error: "The project information could not be modified." })
+        .catch((err) => {
+            res.status(500).json({ error: "The project information could not be modified." + err})
         })
 })
 
@@ -114,8 +114,8 @@ router.post("/", (req, res) => {
         .then(() => {
             res.status(201).json({ postedContent: project, url: url, operation: "POST" })
         })
-        .catch(() => {
-            res.status(500).json({ error: "There was an error while saving the project to the database" })
+        .catch((err) => {
+            res.status(500).json({ error: "There was an error while saving the project to the database" + err})
         })
 });
 
