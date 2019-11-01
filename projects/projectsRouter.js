@@ -10,8 +10,8 @@ router.get("/", (req, res) => {
         .then((posts) => {
             res.status(200).json(posts)
         })
-        .catch(() => {
-            res.status(500).json({ error: "The posts information could not be retrieved." })
+        .catch((err) => {
+            res.status(500).json({ error: "The posts information could not be retrieved." + err})
         })
 })
 
@@ -27,8 +27,25 @@ router.get("/:id", (req, res) => {
             }
             res.status(200).json({ posts: posts })
         })
-        .catch(() => {
-            res.status(500).json({ error: "The post information could not be retrieved." })
+        .catch((err) => {
+            res.status(500).json({ error: "The post information could not be retrieved." + err})
+        })
+})
+
+//get project actions by id
+router.get("/:id/projActions", (req, res) => {
+    const { id } = req.params;
+
+    dB.getProjectActions(id)
+        .then((posts) => {
+
+            if (posts.length === 0) {
+                res.status(404).json({ message: "The post with the specified ID does not exist." })
+            }
+            res.status(200).json({ posts: posts })
+        })
+        .catch((err) => {
+            res.status(500).json({ error: "The post information could not be retrieved." + err})
         })
 })
 
