@@ -44,6 +44,28 @@ router.delete('/:id', (req, res) => {
             res.status(500).json({ error: "The action could not be removed" })
         })
 });
+
+router.put('/:id', (req, res) => {
+    const action = req.body;
+    const { description, notes, completed} = req.body;
+    const { url } = req;
+    const { id } = req.params;
+
+    if (!description || !notes || !completed) {
+        res.status(400).json({ errorMessage: "Please provide description, notes, completed for the action." })
+    }
+    actionDb.update(id, action)
+        .then((usersID) => {
+            if (usersID) {
+                res.status(200).json({ updatedAction: action, url: url, operation: "PUT" })
+            }
+            res.status(404).json({ message: "The action with the specified ID does not exist." })
+        })
+        .catch((err) => {
+            res.status(500).json({ error: "The post information could not be modified." + err})
+        })
+});
+
  
 
 module.exports = router;
