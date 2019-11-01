@@ -18,10 +18,20 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <div>
       <>
         <h1>webapi-sprint-challenge App</h1>
-        
+        {state.map((project) => (
+          
+          
+            <div>
+              {console.log(project)}
+              Name: {project.name}<br />
+            Description: {project.description}<br />
+            Completed: {project.completed}<br /><br /><br />
+            </div>
+          
+        ))}
       </>
     </div>
   );
