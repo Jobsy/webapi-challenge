@@ -25,14 +25,24 @@ In this challenge, create a web API around the following resources: `Projects` a
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your Team Lead.
 
 - [ ] Mention two parts of Express that you learned about this week.
+-Server-Side-Routing with Express
+-Express MiddleWare
+
 
 - [ ] Describe Middleware?
+-Middleware is array of functions that get executed in the order they are introduced into the server code
+
 
 - [ ] Describe a Resource?
+-Resources are encapsulated within objects that use them, such as a file object having a field whose value is a file descriptor (or more general file handle)
+
 
 - [ ] What can the API return to help clients know if a request was successful?
+-Response(res) to Request(req) from the data base
+
 
 - [ ] How can we partition our application into sub-applications?
+-By the use of MiddleWares
 
 ## Project Setup
 
